@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+
+dubbo:
+  application:
+    name: spring-boot-demo-dubbo-provider
+  registry:
+    address: localhost
+    check: false
+    port: 2181

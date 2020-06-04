@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yqsh.springboot.demo</groupId>
+    <artifactId>spring-boot-demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>spring-boot-demo-helloworld</module>
+        <module>spring-boot-demo-properties</module>
+        <module>spring-boot-demo-actuator</module>
+        <module>spring-boot-demo-admin</module>
+        <module>spring-boot-demo-async</module>
+        <module>spring-boot-demo-cache-ehcache</module>
+        <module>spring-boot-demo-cache-redis</module>
+        <module>spring-boot-demo-dubbo</module>
+        <module>spring-boot-demo-exception-handler</module>
+        <module>spring-boot-demo-task-quartz</module>
+        <module>spring-boot-demo-task-xxl-job</module>
+        <module>spring-boot-demo-sharding-jdbc</module>
+        <module>spring-boot-demo-rabbitmq</module>
+        <module>spring-boot-demo-oauth</module>
+        <module>spring-boot-demo-security</module>
+        <module>spring-boot-demo-elasticsearch</module>
+        <module>spring-boot-demo-docker</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <hutool.version>5.0.0</hutool.version>
+        <guava.version>28.1-jre</guava.version>
+        <spring-security-version>5.3.0.RELEASE</spring-security-version>
+    </properties>
+
+    <packaging>pom</packaging>
+
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.2.4.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-bom</artifactId>
+                <version>{spring-security-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- hutool工具类 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

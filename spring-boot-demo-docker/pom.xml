@@ -13,6 +13,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <docker.image.prefix>yqsh</docker.image.prefix>
     </properties>
 
     <dependencies>
@@ -34,11 +35,61 @@
         </dependency>
     </dependencies>
 
+    <repositories>
+        <repository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <build>
+        <finalName>spring-boot-demo-docker</finalName>
         <plugins>
-            <plugin>
+           <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- docker plugin -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--<imageName>${docker.image.prefix}/${project.artifactId}</imageName>-->
+                    <!-- 镜像名称 -->
+                    <imageName>${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <!-- 基础镜像
+                    <baseImage>jdk1.8</baseImage>-->
+                    <!-- 镜像制作者
+                    <maintainer>higer</maintainer>-->
+
+                    <dockerHost>http://192.168.2.173:2375</dockerHost>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
